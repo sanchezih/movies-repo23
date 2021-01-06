@@ -5,9 +5,12 @@ var express = require("express"),
   bodyParser = require("body-parser"),
   methodOverride = require("method-override"),
   mongoose = require('mongoose');
+const port = process.env.PORT || 3000;
 
 // Connection to DB
-mongoose.connect('mongodb://localhost/tvshows', function (err, res) {
+//mongoose.connect('mongodb://localhost/tvshows', function (err, res) {
+mongoose.connect('mongodb+srv://ignacio:nacho@cluster0.rc9wj.mongodb.net/data?retryWrites=true&w=majority', function (err, res) {
+
   if (err) throw err;
   console.log('Connected to Database');
 });
@@ -43,6 +46,6 @@ tvshows.route('/tvshows/:id')
 app.use('/api', tvshows);
 
 // Start server
-app.listen(3000, function () {
-  console.log("Node server running on http://localhost:3000");
+app.listen(port, () => {
+  console.info(`listening on port ${port}`);
 });
